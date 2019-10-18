@@ -15,6 +15,9 @@ services:
       - ./vault/logs:/vault/logs
     environment:
       - VAULT_ADDR=http://127.0.0.1:8200
+    networks:
+      - comms
+      - default
     command: server -config=/vault/config/vault-config.json
     cap_add:
       - IPC_LOCK
@@ -41,3 +44,7 @@ services:
       - ./consul/config/consul-config.json:/consul/config/config.json
     depends_on:
       - consul
+
+networks:
+  comms:
+    external: true
